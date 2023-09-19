@@ -1,19 +1,17 @@
+import type { GenerateMatrixParams } from './types.ts';
+
 export function getRandomInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 
-export function generateMatrix(): number[][] {
-  const ROWS = 13;
-  const COLUMNS = 13;
-  const MIN = -100;
-  const MAX = 100;
+export function generateMatrix({ rows, cols, min, max }: GenerateMatrixParams) {
   const matrix: number[][] = [];
 
-  for (let i = 0; i < ROWS; i++) {
+  for (let i = 0; i < rows; i++) {
     matrix[i] = [];
 
-    for (let j = 0; j < COLUMNS; j++) {
-      matrix[i][j] = getRandomInt(MIN, MAX);
+    for (let j = 0; j < cols; j++) {
+      matrix[i][j] = getRandomInt(min, max);
     }
   }
 
@@ -32,22 +30,10 @@ export function getCellColor(value: number) {
   return 'dark';
 }
 
-// export function getCellBrightness(value: number): number {
-//   if (value > 0) {
-//     return 0 + value;
-//   }
-//
-//   if (value < 0) {
-//     return 0 + Math.abs(value);
-//   }
-//
-//   return 100;
-// }
-
-export function getCellOpacity(value: number): number {
-  if (value === 100) {
-    return 50;
+export function getCloakOpacity(value: number, max: number): number {
+  if (value === 0) {
+    return 0;
   }
 
-  return 100 - Math.abs(value);
+  return max - Math.abs(value);
 }
