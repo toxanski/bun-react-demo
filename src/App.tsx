@@ -32,8 +32,6 @@ export default function App() {
     return filter === cellVariant;
   }
 
-  console.log('mode', filter);
-
   return (
     <main>
       <div className="table">
